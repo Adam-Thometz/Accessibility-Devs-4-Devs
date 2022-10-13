@@ -11,27 +11,46 @@
     width: 500px;
     height: 700px;
   }
+
+  .skiplink {
+    position: absolute;
+    top: 0;
+    left: -200%;
+    background-color: orange;
+    padding: 20px;
+  }
+
+  .skiplink:focus {
+    left: 0;
+  }
 </style>
 <body>
   <nav>
+    <a class="skiplink" href="#heading">Skip to main content</a>
     <a href="index.html">Home</a>
     <a href="form.html">Form</a>
     <a href="counter.html">Counter</a>
-    <a href="#inaccessible">Inaccessible form</a>
+    <a href="#accessible">Inaccessible form</a>
     <a href="#lizard">A Lizard</a>
   </nav>
-  <h1>Form Fun!</h1>
-  <form id="inaccessible" onsubmit="submitInaccessible()">
-    <h2>Inaccessible</h2>
-    <p>First Name</p>
-    <input type="text" />
-    <p>Last Name</p>
-    <input type="text" />
-    <p>Email</p>
-    <input type="email" />
-    <button type="submit">Submit</button>
+  <h1 tabindex="0" id="heading">Form Fun!</h1>
+  <form id="accessible">
+    <h2>Accessible</h2>
+    <label for="first">First Name</label>
+    <input id="first" type="text" />
+    <label for="last">Last Name</label>
+    <input id="last" type="text" />
+    <label for="email">Email</label>
+    <input id="email" type="email" />
+    <div
+      role="button"
+      tabindex="0"
+      onclick="submitAccessible()"
+      onkeydown="submitAccessible()"
+      aria-label="Alert user to submission of data"
+    >Submit</div>
   </form>
-  <img id="lizard" src="unity.jpg" />
+  <img id="lizard" src="unity.jpg" alt="A lizard reading a book" />
 </body>
 <script>
   function submitInaccessible() {
